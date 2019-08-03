@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_package = "com.spark.dialect.generated.proto";
+option java_outer_classname = "PbExample";
+option java_generic_services = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+message PbExampleDataRequest {
+    string taskId = 1;
+    string schema = 2;
+    int64 batchSize = 3;
+    bytes batchData = 4;
+}
+
+message PbExampleComputeRequest {
+    string taskId = 1;
+    string targetFile = 2;
+}
+
+message PbExampleResponse {
+    enum STATUS {
+        OK = 0;
+        BUSY = 1;
+        ERROR = 2;
+    }
+    STATUS status = 1;
+    string message = 2;
+}
+
+service PbExampleService {
+  rpc sendBatch(PbExampleDataRequest)
+    returns (PbExampleResponse);
+
+  rpc compute(PbExampleComputeRequest)
+    returns (PbExampleResponse);
+}

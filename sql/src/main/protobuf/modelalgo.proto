@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option java_package = "com.spark.dialect.generated.proto";
+option java_outer_classname = "ModelAlgorithm";
+option java_generic_services = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+message ModelAlgorithmDataRequest {
+    string taskId = 1;
+    string schema = 2;
+    int64 batchSize = 3;
+    bytes batchData = 4;
+}
+
+message ModelAlgorithmComputeRequest {
+    string taskId = 1;
+    string targetFile = 2;
+}
+
+message ModelAlgorithmCleanRequest {
+    string taskId = 1;
+}
+
+message ModelAlgorithmPredictRequest {
+    string modelFile = 1;
+    bytes features = 2;
+}
+
+message ModelAlgorithmResponse {
+    enum STATUS {
+        OK = 0;
+        BUSY = 1;
+        ERROR = 2;
+    }
+    STATUS status = 1;
+    string message = 2;
+}
+
+message ModelPredictResponse {
+    enum STATUS {
+        OK = 0;
+        BUSY = 1;
+        ERROR = 2;
+    }
+    STATUS status = 1;
+    bytes result = 2;
+}
+
+service ModelAlgorithmService {
+  rpc sendBatch(ModelAlgorithmDataRequest)
+    returns (ModelAlgorithmResponse);
+
+  rpc computeLR(ModelAlgorithmComputeRequest)
+    returns (ModelAlgorithmResponse);
+
+  rpc cleanBatch(ModelAlgorithmCleanRequest)
+    returns (ModelAlgorithmResponse);
+
+  rpc predict(ModelAlgorithmPredictRequest)
+    returns (ModelPredictResponse);
+}
