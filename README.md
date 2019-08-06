@@ -90,6 +90,7 @@ TBLPROPERTIES(
 ```
 
 3、增强 update / delete 
+
 (1) 增强 update / delete 语法
 
 (2) 支持 hive、ES、HBase、kudu 等存储
