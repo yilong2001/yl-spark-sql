@@ -1,5 +1,5 @@
 # yl-spark-sql
-基于 Spark 的 SQL 方言，扩展和增强了 SQL 语法，以支持批处理、机器学习、模型服务、以及流处理的一个 SQL 框架。
+一种基于 Spark 的 SQL 方言，扩展和增强了 SQL 语法，以支持批处理、机器学习、模型服务、以及流处理的一个 SQL 框架。
 
 ## lambda 架构的问题
 lambda 三层架构：batch layer、speed layer、serving layer，三层独立。
