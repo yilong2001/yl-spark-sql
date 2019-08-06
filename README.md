@@ -41,7 +41,7 @@ lambda 三层架构：batch layer、speed layer、serving layer，三层独立�
 ```
 
 ## 批处理
-1、以备份为例；
+### 1、以备份为例；
 ```
 HBase创建快照：
 snapshot ‘tableName’, ‘snapshotName’
@@ -70,7 +70,7 @@ TBLPROPERTIES(
 "spark.dialect.hbase.zookeeper.property.clientPort"="2181")
 ```
 
-2、以 hive to hbase 为例：
+### 2、以 hive to hbase 为例：
 ```
 使用 bulkload 机制，数据从 hive 导入 hbase 的步骤如下：
 1) 创建一个outputformat为HiveHFileOutputFormat的hive表(生成hfile)
@@ -89,7 +89,7 @@ TBLPROPERTIES(
 
 ```
 
-3、增强 update / delete 
+### 3、增强 update / delete 
 
 (1) 增强 update / delete 语法
 
@@ -111,7 +111,7 @@ WHERE p01.name = tm.name1 and p01.name = concat(tm.name1,'')
 
 ## 机器学习
 
-### 步骤：基于 SQL 方言
+### 1、基于 SQL 方言的步骤
 ```
 1) 创建外部表，存储类型可以是：HBase/ES/MySQL/文件/hive等
 2) 使用 SQL 进行数据清洗，完成关联、聚合、处理
@@ -121,7 +121,7 @@ WHERE p01.name = tm.name1 and p01.name = concat(tm.name1,'')
 
 ```
 
-### train sql 示例：
+### 2、train sql 示例：
 ```
 TRAIN MODEL LogisticRegression FROM (
 select step,
@@ -141,20 +141,20 @@ INTO
 '/tmp/models/lrmodel.m'
 ```
 
-### register sql 示例：
+### 3、register sql 示例：
 ```
  register model LogisticRegression
  FROM '/tmp/models/lrmodel.m'
  AS lr_predict
 ```
 
-### predict sql 示例：
+### 4、predict sql 示例：
 ```
 select label, lr_predict((step,tcd,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,errorBalanceOrig,errorBalanceDest)) as predict 
   from tmp_p_part_log
 ```
 
-### UDF 示例：
+### 5、UDF 示例：
 ```
 计算向量中的最大值
 Select vec_max(vec_dense(array(0.1, 0.5, 0.8)))
@@ -163,7 +163,7 @@ Select vec_max(vec_dense(array(0.1, 0.5, 0.8)))
 Select vec_argmax(vec_dense(array(0.1, 0.5, 0.8)))
 ```
 
-### 计算框架
+### 6、计算框架
 
 1、Spark MLlib
 
@@ -176,7 +176,7 @@ Select vec_argmax(vec_dense(array(0.1, 0.5, 0.8)))
 5、可以支持更多：Keras、Caffe2、CNTK 等
 
 ## 模型服务
-### 模型服务框架
+### 1、模型服务框架
 ```
 Clipper： RISE Lab开发， 在应用和机器学习模型之间提供预测服务
 Seldon：在Kubernetes上部署机器学习模型
@@ -185,7 +185,7 @@ Mleap：Spark 与 SKLearn 之间的格式转换库
 PredictionIO：开源机器学习服务应用
 其他...
 ```
-### SQL 方言 示例：
+### 2、SQL 方言 示例：
 ```
 deploy model LogisticRegression FROM ‘/tmp/models/lrmodel.m’ to gatewayName 
 options (…)
