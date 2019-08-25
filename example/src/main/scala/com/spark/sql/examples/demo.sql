@@ -1,7 +1,7 @@
 -- (1) snapshot
 -- hive snapshot
 MAKE SNAPSHOT snapshot_pp83
-DIRECTORY '/Users/yilong/work/bigdata/code/mygithub/yl-spark-sql/datasource'
+DIRECTORY '/tmp/yl-spark-sql/datasource'
 FROM p_p83
 PARTITION (age=21, sex='F')
 PARTITION (age=25, sex='M')
@@ -34,13 +34,13 @@ as rowkey, 'uid_a100001' as uid, 91 as grade from demo_parquet1
 -- update sql
 -- local example
 CREATE TEMPORARY VIEW p01 (name STRING, age INT,job STRING) USING CSV OPTIONS
- (sep ';' , header 'true' , path '/Users/yilong/work/bigdata/code/mygithub/yl-spark-sql/datas/source/people.csv')
+ (sep ';' , header 'true' , path '/tmp/yl-spark-sql/datas/source/p01.csv')
 
 CREATE TEMPORARY VIEW p02 (name STRING, age INT,job STRING) USING CSV OPTIONS
-(sep ';' , header 'true' , path '/Users/yilong/work/bigdata/code/mygithub/yl-spark-sql/datas/source/people1.csv')
+(sep ';' , header 'true' , path '/tmp/yl-spark-sql/datas/source/p02.csv')
 
 CREATE TEMPORARY VIEW p03 (name STRING, age INT,job STRING) USING CSV OPTIONS
-(sep ';' , header 'true' , path '/Users/yilong/work/bigdata/code/mygithub/yl-spark-sql/datas/source/peopleup.csv')
+(sep ';' , header 'true' , path '/tmp/yl-spark-sql/datas/source/p03.csv')
 
 UPDATE p01 SET age = tm.age + 2, job = concat(tm.job,'_succ') FROM
 (select p03.name as name1, p03.age as age, p03.job as job, p02.name as name2 from p02, p03 where p02.name = p03.name) tm

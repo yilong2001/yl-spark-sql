@@ -13,6 +13,7 @@
     <modules>
     <module>sql</module>
     <module>example</module>
+    <module>modelservice</module>
     </modules>
 
     <properties>

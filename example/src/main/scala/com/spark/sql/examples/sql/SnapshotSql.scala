@@ -147,7 +147,8 @@ object SnapshotSql {
         |create external table hbase_myrecord_t1(rowkey STRING,uid STRING,nick STRING,grade INT)
         |STORED BY 'org.apache.hadoop.hive.ql.metadata.DefaultStorageHandler'
         |WITH SERDEPROPERTIES( "hbase.columns.mapping"=":key,f:uic,f:nick,f:grade")
-        |TBLPROPERTIES("spark.dialect.hbase.table.name"="myrecord_t1",
+        |TBLPROPERTIES("spark.dialect.storage.type"="hbase",
+        |"spark.dialect.hbase.table.name"="myrecord_t1",
         |"spark.dialect.hbase.zookeeper.quorum"="localhost",
         |"spark.dialect.hbase.zookeeper.property.clientPort"="2181")
       """.stripMargin
