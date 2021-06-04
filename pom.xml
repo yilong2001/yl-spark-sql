@@ -36,7 +36,7 @@
         <kite.version>0.13.0</kite.version>
 
         <junit.version>4.12</junit.version>
-        <httpclient.version>4.5.4</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <scalactic.version>3.0.0</scalactic.version>
         <nettyall.version>4.1.19.Final</nettyall.version>
         <thrift.version>0.9.3</thrift.version>
